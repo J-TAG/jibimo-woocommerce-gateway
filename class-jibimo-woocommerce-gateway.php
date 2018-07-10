@@ -327,7 +327,17 @@ function loadJibimoGateway()
                 $products = implode(' - ', $products);
 
                 $description = 'خرید به شماره سفارش : ' . $order->get_order_number() . ' | خریدار : ' . $order->billing_first_name . ' ' . $order->billing_last_name . ' | محصولات : ' . $products;
-                $mobile = get_post_meta($order_id, '_billing_phone', true) ? get_post_meta($order_id, '_billing_phone', true) : '-';
+                $mobile = get_post_meta($order_id, '_billing_phone', true) ? get_post_meta($order_id, '_billing_phone', true) : '';
+
+                // If woo commerce has not enabled billing, we can try to load mobile from wordpress
+                if(empty(trim($mobile))) {
+                    $mobile = get_user_meta(get_current_user_id(), 'phone_number', true);
+
+                    if(empty(trim($mobile))) {
+                        // Try one more time with different key :)
+                        $mobile = get_user_meta(get_current_user_id(), 'phone', true);
+                    }
+                }
                 $email = $order->billing_email;
                 $payer = $order->billing_first_name . ' ' . $order->billing_last_name;
                 $resNumber = intval($order->get_order_number());
