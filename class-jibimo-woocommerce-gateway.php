@@ -213,7 +213,7 @@ function loadJibimoGateway()
             {
                 try {
                     $handler = curl_init($this->getJibimoUrl() . 'request_transaction');
-                    curl_setopt($handler, CURLOPT_USERAGENT, 'Jibimo Woocommerce Plugin v1.0');
+                    curl_setopt($handler, CURLOPT_USERAGENT, 'Jibimo Woocommerce Plugin v1.1');
                     curl_setopt($handler, CURLOPT_CUSTOMREQUEST, 'POST');
                     curl_setopt($handler, CURLOPT_POSTFIELDS, $params);
                     curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
@@ -236,7 +236,7 @@ function loadJibimoGateway()
                     $curl = curl_init($this->getJibimoUrl() . 'request_transaction/' . $transactionId);
                     curl_setopt_array($curl, array(
                         CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_USERAGENT => 'Jibimo Woocommerce Plugin v1.0',
+                        CURLOPT_USERAGENT => 'Jibimo Woocommerce Plugin v1.1',
                         CURLOPT_HTTPHEADER => array(
                             'Accept: application/json',
                             'Authorization: Bearer ' . $token,
@@ -263,7 +263,7 @@ function loadJibimoGateway()
             {
                 try {
                     $handler = curl_init($this->getJibimoUrl() . $action);
-                    curl_setopt($handler, CURLOPT_USERAGENT, 'Jibimo Woocommerce Plugin v1.0');
+                    curl_setopt($handler, CURLOPT_USERAGENT, 'Jibimo Woocommerce Plugin v1.1');
                     curl_setopt($handler, CURLOPT_CUSTOMREQUEST, 'POST');
                     curl_setopt($handler, CURLOPT_POSTFIELDS, $params);
                     curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
@@ -364,7 +364,7 @@ function loadJibimoGateway()
                 }
                 $privacy = $this->privacy;
 
-                $data = array('mobile_number' => $mobile, 'amount' => $amount, 'privacy' => $privacy, 'description' => $description, 'tracker_id' => uniqid());
+                $data = array('mobile_number' => $mobile, 'amount' => $amount, 'privacy' => $privacy, 'description' => $description, 'tracker_id' => uniqid(), 'return_url' => $callbackUrl);
 
                 $result = $this->initiateJibimoRequest($this->apitoken, json_encode($data));
                 if ($result === false) {
