@@ -74,6 +74,7 @@ function loadJibimoGateway()
                 $this->icon_type = $this->settings['icon_type'];
                 $this->privacy = $this->settings['privacy'];
 
+                $this->jibimo_description = $this->settings['jibimo_description'];
                 $this->success_massage = $this->settings['success_massage'];
                 $this->failed_massage = $this->settings['failed_massage'];
 
@@ -183,6 +184,12 @@ function loadJibimoGateway()
                             'title' => __('تنظیمات عملیات پرداخت', 'woocommerce'),
                             'type' => 'title',
                             'description' => '',
+                        ),
+                        'jibimo_description' => array(
+                            'title' => __('متن تراکنش در جیبی‌مو', 'woocommerce'),
+                            'type' => 'textarea',
+                            'description' => __('این متن در شبکه‌ی اجتماعی جیبی‌مو نمایش داده می‌شود. شما می‌توانید اطلاعاتی از خرید را توسط شورت‌کد در آن قرار دهید. این شورت‌کدها به شرح روبه‌روست: {order_number} با شماره سفارش جابجا خواهد شد. {first_name} با نام خریدار جابجا خواهد شد. {last_name} با نام خانوادگی خریدار جابجا خواهد شد. {products} با نام محصولات خریداری شده توسط کاربر جابجا خواهد شد.', 'woocommerce'),
+                            'default' => 'خرید به شماره سفارش : {order_number} | خریدار : {first_name} {last_name} | محصولات : {products}',
                         ),
                         'success_massage' => array(
                             'title' => __('پیام پرداخت موفق', 'woocommerce'),
@@ -326,7 +333,13 @@ function loadJibimoGateway()
                 }
                 $products = implode(' - ', $products);
 
-                $description = 'خرید به شماره سفارش : ' . $order->get_order_number() . ' | خریدار : ' . $order->billing_first_name . ' ' . $order->billing_last_name . ' | محصولات : ' . $products;
+                $description = $this->jibimo_description;
+                
+                $description = str_replace("{order_number}", $order->get_order_number(), $description);
+                $description = str_replace("{first_name}", $order->billing_first_name, $description);
+                $description = str_replace("{last_name}", $order->billing_last_name, $description);
+                $description = str_replace("{products}", $products, $description);
+                
                 $mobile = get_post_meta($order_id, '_billing_phone', true) ? get_post_meta($order_id, '_billing_phone', true) : '';
 
                 // If woo commerce has not enabled billing, we can try to load mobile from wordpress
