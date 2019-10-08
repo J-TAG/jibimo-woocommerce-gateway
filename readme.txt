@@ -1,6 +1,6 @@
-﻿=== Woocommerce Jibimo Payment Gateway ===
+﻿=== Jibimo Woo Payment Gateway ===
 Contributors: hessaam
-Tags: woocommerce,jibimo, payment gateway,ووکامرس, ووکامرس فارسی,درگاه پرداخت,جیبیمو ,جیبی‌مو,جیبی مو,جیبیمو
+Tags: jibimo, payment gateway,ووکامرس, ووکامرس فارسی,درگاه پرداخت,جیبیمو ,جیبی‌مو,جیبی مو,جیبیمو
 Requires at least: 4.5
 Tested up to: 4.9.6
 Stable tag: 4.3
@@ -22,6 +22,6 @@ Stable tag: 4.3
 
 
 == Installation ==
-1. پوشه `jibimo-woocommerce-gateway` را در مسیر `/wp-content/plugins/` آپلود کنید
+1. پوشه `jibimo-woo-gateway` را در مسیر `/wp-content/plugins/` آپلود کنید
 2. افزونه را از طریق منوی 'افزونه ها' در وردپرس فعال کنید
 3. تنظیمات افزونه را می توانید از طریق قسمت تنظیمات ووکامرس / تسویه حساب انجام دهید
